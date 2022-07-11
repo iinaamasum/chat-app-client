@@ -1,7 +1,11 @@
 import React from 'react';
+import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import auth from '../../firebase.init';
 import logo from '../../images/logo/logo.png';
+import LoadingComponent from '../../Shared/LoadingComponent';
 
 const ResetPass = () => {
   // variables and states
@@ -10,11 +14,31 @@ const ResetPass = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [sendPasswordResetEmail, sending, error] =
+    useSendPasswordResetEmail(auth);
 
   // functions
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+    try {
+      await sendPasswordResetEmail(data.email);
+      toast.success(
+        'Reset link has been sent to the associate email. Please reset password by the given link.'
+      );
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  // loading
+  if (sending) {
+    return <LoadingComponent />;
+  }
+
+  // error
+  if (error) {
+    toast.error(error.message);
+  }
   return (
     <section>
       <div className="flex justify-center items-center min-h-screen bg-[#f7f7f7]">

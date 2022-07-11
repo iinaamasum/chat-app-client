@@ -28,7 +28,7 @@ const Login = () => {
     try {
       await signInWithEmailAndPassword(data.email, data.password);
     } catch (err) {
-      toast.error(err.message);
+      console.log(err);
     }
   };
 
@@ -115,9 +115,8 @@ const Login = () => {
                       message: 'Password Required !!!',
                     },
                     pattern: {
-                      value: /(?=.*[!#$%&?^*@~() "])(?=.{8,})/,
-                      message:
-                        'Password Must be 8 char including a special char !!!',
+                      value: /^(?=.{6,})/,
+                      message: 'Password has less than 6 characters!!!',
                     },
                   })}
                 />
