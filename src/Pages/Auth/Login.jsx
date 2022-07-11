@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import {
+  useAuthState,
+  useSignInWithEmailAndPassword,
+} from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
+import auth from '../../firebase.init';
 import logo from '../../images/logo/logo.png';
+import LoadingComponent from '../../Shared/LoadingComponent';
 
 const Login = () => {
   // variables and states
@@ -10,11 +17,38 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [signInWithEmailAndPassword, userForm, loadingForm, errorForm] =
+    useSignInWithEmailAndPassword(auth);
+  const navigate = useNavigate();
+  const [user] = useAuthState(auth);
 
   // functions
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+    try {
+      await signInWithEmailAndPassword(data.email, data.password);
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
+
+  // useEffect for finding user and navigate
+  useEffect(() => {
+    if (user) {
+      toast.success(`Welcome back`);
+      navigate('/');
+    }
+  }, [user, userForm, navigate]);
+
+  // loading
+  if (loadingForm) {
+    return <LoadingComponent />;
+  }
+
+  // error
+  if (errorForm) {
+    toast.error(errorForm.message);
+  }
   return (
     <section>
       <div className="flex justify-center items-center min-h-screen bg-[#f7f7f7]">
@@ -29,6 +63,7 @@ const Login = () => {
 
             {/* login form  */}
             <form className="" onSubmit={handleSubmit(onSubmit)}>
+              {/* email */}
               <div className="form-control w-full mb-5">
                 <label className="">
                   <span className="text-primary font-semibold text-xl">
@@ -63,6 +98,7 @@ const Login = () => {
                   )}
                 </label>
               </div>
+              {/* password */}
               <div className="form-control w-full">
                 <label className="">
                   <span className="text-primary font-semibold text-xl">
@@ -98,6 +134,7 @@ const Login = () => {
                   )}
                 </label>
               </div>
+              {/* forget pass */}
               <p className="text-[13px] mt-2 font-medium">
                 Forgot Password?{' '}
                 <Link
@@ -107,11 +144,13 @@ const Login = () => {
                   Click Here
                 </Link>
               </p>
+              {/* submit */}
               <input
                 className="btn btn-primary capitalize font-bold w-full mt-3 text-xl"
                 type="submit"
                 value="LogIn"
               />
+              {/* create account link  */}
               <div className=" inline-flex justify-center w-full">
                 <Link
                   to="/register"

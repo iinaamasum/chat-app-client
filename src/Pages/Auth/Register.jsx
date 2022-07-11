@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import {
+  useAuthState,
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile,
+} from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
+import auth from '../../firebase.init.js';
 import logo from '../../images/logo/logo.png';
+import LoadingComponent from '../../Shared/LoadingComponent.jsx';
 
 const Register = () => {
   // variables and states
@@ -10,11 +18,43 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [createUserWithEmailAndPassword, userForm, loadingForm, errorForm] =
+    useCreateUserWithEmailAndPassword(auth);
+  const [updateProfile, updating, errorProfileUpdate] = useUpdateProfile(auth);
+  const navigate = useNavigate();
+  const [user] = useAuthState(auth);
 
   // functions
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+    try {
+      await createUserWithEmailAndPassword(data.email, data.password);
+      await updateProfile({ displayName: data.name });
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
+
+  // useEffect for finding user and navigate
+  useEffect(() => {
+    const userFound = user || userForm;
+    if (userFound) {
+      toast.success(`Welcome ${userFound.displayName}`);
+      navigate('/');
+    }
+  }, [user, userForm, navigate]);
+
+  // loading
+  if (updating || loadingForm) {
+    return <LoadingComponent />;
+  }
+
+  // error
+  if (errorForm || errorProfileUpdate) {
+    let error = errorForm || errorProfileUpdate;
+    toast.error(error?.message);
+    console.log(error);
+  }
   return (
     <section>
       <div className="flex justify-center items-center min-h-screen bg-[#f7f7f7]">
@@ -128,11 +168,15 @@ const Register = () => {
                   )}
                 </label>
               </div>
+
+              {/* submit form  */}
               <input
                 className="btn btn-primary capitalize font-bold w-full mt-3 text-xl"
                 type="submit"
                 value="Register"
               />
+
+              {/* login page link  */}
               <div className="inline-flex justify-center w-full">
                 <Link
                   to="/login"

@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router-dom';
 import Login from './Pages/Auth/Login.jsx';
 import Register from './Pages/Auth/Register.jsx';
@@ -13,6 +14,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/reset-pass" element={<ResetPass />} />
       </Routes>
+      <Toaster />
     </>
   );
 }
