@@ -31,15 +31,17 @@ const Register = () => {
       await createUserWithEmailAndPassword(data.email, data.password);
       await updateProfile({ displayName: data.name });
     } catch (err) {
-      toast.error(err.message);
+      console.log(err.message);
     }
   };
+
+  console.log(user);
 
   // useEffect for finding user and navigate
   useEffect(() => {
     const userFound = user || userForm;
     if (userFound) {
-      toast.success(`Welcome ${userFound.displayName}`);
+      toast.success(`Welcome to chit-chat`);
       navigate('/');
     }
   }, [user, userForm, navigate]);
@@ -53,7 +55,6 @@ const Register = () => {
   if (errorForm || errorProfileUpdate) {
     let error = errorForm || errorProfileUpdate;
     toast.error(error?.message);
-    console.log(error);
   }
   return (
     <section>
