@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo/logo.png';
 
-const Login = () => {
+const Register = () => {
   // variables and states
   const {
     register,
@@ -24,11 +24,39 @@ const Login = () => {
               <img className="w-28 h-28" src={logo} alt="" />
             </div>
             <h2 className="text-2xl text-center my-2 font-bold text-primary">
-              Login
+              Register
             </h2>
 
             {/* login form  */}
             <form className="" onSubmit={handleSubmit(onSubmit)}>
+              {/* name */}
+              <div className="form-control w-full mb-5">
+                <label className="">
+                  <span className="text-primary font-semibold text-xl">
+                    Name
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter Your Name"
+                  className="input input-bordered w-full rounded-lg text-secondary font-medium tracking-wide focus:outline-none bg-gray-100"
+                  {...register('name', {
+                    required: {
+                      value: true,
+                      message: 'Name is required !!!',
+                    },
+                  })}
+                />
+                <label className="level font-bold">
+                  {errors.name?.type === 'required' && (
+                    <span className="label-text-alt text-red-500">
+                      {errors.name.message}
+                    </span>
+                  )}
+                </label>
+              </div>
+
+              {/* email  */}
               <div className="form-control w-full mb-5">
                 <label className="">
                   <span className="text-primary font-semibold text-xl">
@@ -63,6 +91,8 @@ const Login = () => {
                   )}
                 </label>
               </div>
+
+              {/* password  */}
               <div className="form-control w-full">
                 <label className="">
                   <span className="text-primary font-semibold text-xl">
@@ -98,26 +128,17 @@ const Login = () => {
                   )}
                 </label>
               </div>
-              <p className="text-[13px] mt-2 font-medium">
-                Forgot Password?{' '}
-                <Link
-                  className="btn-link font-semibold text-blue-500"
-                  to="/reset-pass"
-                >
-                  Click Here
-                </Link>
-              </p>
               <input
                 className="btn btn-primary capitalize font-bold w-full mt-3 text-xl"
                 type="submit"
-                value="LogIn"
+                value="Register"
               />
-              <div className=" inline-flex justify-center w-full">
+              <div className="inline-flex justify-center w-full">
                 <Link
-                  to="/register"
+                  to="/login"
                   className="btn-link my-3 text-primary font-semibold text-xl"
                 >
-                  Create An Account
+                  LogIn Now
                 </Link>
               </div>
             </form>
@@ -128,4 +149,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
