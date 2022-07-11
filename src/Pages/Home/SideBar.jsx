@@ -1,31 +1,40 @@
 import React from 'react';
+import {
+  BsCalendarCheckFill,
+  BsFillChatDotsFill,
+  BsStarFill,
+} from 'react-icons/bs';
+import { FaUser } from 'react-icons/fa';
+import { NavLink } from 'react-router-dom';
 
 const SideBar = () => {
   return (
-    <section>
-      <div className="drawer drawer-mobile">
-        <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col items-center justify-center">
-          {/* <!-- Page content here --> */}
-          <label
-            for="my-drawer-2"
-            className="btn btn-primary drawer-button lg:hidden"
-          >
-            Open drawer
-          </label>
-        </div>
-        <div className="drawer-side">
-          <label for="my-drawer-2" className="drawer-overlay"></label>
-          <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
-            {/* <!-- Sidebar content here --> */}
-            <li>
-              <a>Sidebar Item 1</a>
-            </li>
-            <li>
-              <a>Sidebar Item 2</a>
-            </li>
-          </ul>
-        </div>
+    <section className="w-36 bg-gray-200 min-h-screen">
+      <div className="flex flex-col justify-center items-center w-full">
+        <NavLink
+          to="/chat"
+          className="text-center w-14 h-14 flex justify-center items-center rounded-xl bg-primary my-6"
+        >
+          <BsFillChatDotsFill size={60} color="white" className="p-2" />
+        </NavLink>
+        <NavLink
+          to="/chat"
+          className="text-center w-14 h-14 flex justify-center items-center rounded-xl bg-primary mb-6"
+        >
+          <FaUser size={55} color="white" className="p-2" />
+        </NavLink>
+        <NavLink
+          to="/chat"
+          className="text-center w-14 h-14 flex justify-center items-center rounded-xl bg-primary mb-6"
+        >
+          <BsStarFill size={60} color="white" className="p-2" />
+        </NavLink>
+        <NavLink
+          to="/chat"
+          className="text-center w-14 h-14 flex justify-center items-center rounded-xl bg-primary mb-6"
+        >
+          <BsCalendarCheckFill size={60} color="white" className="p-2" />
+        </NavLink>
       </div>
     </section>
   );
