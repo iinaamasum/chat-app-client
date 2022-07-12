@@ -1,7 +1,12 @@
 import React from 'react';
+import MessageTopBar from './MessageTopBar';
 
 const MessagesSection = () => {
-  return <div className="bg-red min-h-screen">hi</div>;
+  return (
+    <section className="min-h-screen">
+      <MessageTopBar />
+    </section>
+  );
 };
 
 export default MessagesSection;

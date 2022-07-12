@@ -3,7 +3,7 @@ import user from '../../images/logo/logo.png';
 
 const ChatUsersCard = () => {
   return (
-    <section className="bg-gray-200 px-4 py-2">
+    <section className="border-l-8 bg-gray-200 border-primary px-4 py-2">
       <div className="flex justify-between items-center">
         <img className="w-14 h-14 rounded-full" src={user} alt="" />
         <div className="ml-4">
