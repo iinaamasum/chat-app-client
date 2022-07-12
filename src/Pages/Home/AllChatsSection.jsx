@@ -7,7 +7,7 @@ import ChatUsersCard from './ChatUsersCard';
 
 const AllChatsSection = () => {
   return (
-    <section className="min-h-screen max-h-screen">
+    <section className="min-h-[70vh]">
       <div className="">
         <div className="shadow-2xl rounded-lg">
           <div className="px-4 pt-4">

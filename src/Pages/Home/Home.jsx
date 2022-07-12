@@ -12,7 +12,7 @@ const Home = () => {
       <LeftNavSideBar />
       <div className="w-full">
         <TopBar />
-        <div className="flex items-center justify-center w-full">
+        <div className="flex justify-center w-full">
           <div className="w-[23%]">
             <AllChatsSection />
           </div>

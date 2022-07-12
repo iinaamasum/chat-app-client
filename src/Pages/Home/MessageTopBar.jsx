@@ -8,7 +8,7 @@ const MessageTopBar = () => {
         <div className="flex items-center">
           <div class="avatar">
             <div class="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-              <img src="https://placeimg.com/192/192/people" />
+              <img src="https://placeimg.com/192/192/people" alt="" />
             </div>
           </div>
           <div className="ml-6">
