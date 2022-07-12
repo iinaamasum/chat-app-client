@@ -1,10 +1,12 @@
 import React from 'react';
+import MessageBottomBar from './MessageBottomBar';
 import MessageTopBar from './MessageTopBar';
 
 const MessagesSection = () => {
   return (
-    <section className="min-h-screen">
+    <section className="">
       <MessageTopBar />
+      <MessageBottomBar />
     </section>
   );
 };

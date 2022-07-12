@@ -16,12 +16,13 @@ const Home = () => {
           <div className="w-[23%]">
             <AllChatsSection />
           </div>
-          <div className="w-[54%]">
+          <div className="w-[52%]">
             <MessagesSection />
           </div>
           <div className="w-[23%]">
             <ChatUserInfo />
           </div>
+          <div className="w-[2%]"></div>
         </div>
       </div>
     </div>
