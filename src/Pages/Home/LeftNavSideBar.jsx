@@ -7,8 +7,9 @@ import {
 import { FaUser } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 
-const SideBar = () => {
+const LeftNavSideBar = () => {
   return (
+    // left most sidebar to navigate
     <section className="w-36 bg-gray-200 min-h-screen">
       <div className="flex flex-col justify-center items-center w-full">
         <NavLink
@@ -40,4 +41,4 @@ const SideBar = () => {
   );
 };
 
-export default SideBar;
+export default LeftNavSideBar;
