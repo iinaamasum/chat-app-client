@@ -9,9 +9,6 @@ const AllChatsSection = () => {
   return (
     <section className="min-h-screen max-h-screen">
       <div className="">
-        <h2 className="text-4xl font-medium text-center text-primary pt-10">
-          Messages
-        </h2>
         <div className="shadow-2xl rounded-lg">
           <div className="px-4 pt-4">
             {/* search section  */}
