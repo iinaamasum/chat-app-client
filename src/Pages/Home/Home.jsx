@@ -7,7 +7,7 @@ import TopBar from './TopBar';
 
 const Home = () => {
   return (
-    <div className="flex bg-[#f7f7f7]">
+    <div className="flex bg-[#f7f7f7] max-h-screen">
       {/* left most side bar */}
       <LeftNavSideBar />
       <div className="w-full">

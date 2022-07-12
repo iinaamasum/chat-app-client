@@ -16,7 +16,9 @@ const MessageBottomBar = () => {
         ></textarea>
         <div className="flex items-center justify-end">
           <GrAttachment className="mr-3" size={23} />
-          <BiSend size={23} className="mr-3" />
+          <p className="p-1 mr-2 rounded-full bg-error">
+            <BiSend size={23} color="white" className="" />
+          </p>
         </div>
       </div>
     </section>
